@@ -18,7 +18,7 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.baseUrl = System.getProperty("https://demoqa.com");
+        Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = System.getProperty("browser"); //задаем парметр из Jenkins
         if (Configuration.browser == null) {
             throw new IllegalStateException("Параметр 'browser' не передан через Jenkins, проверьте параметры запуска");
