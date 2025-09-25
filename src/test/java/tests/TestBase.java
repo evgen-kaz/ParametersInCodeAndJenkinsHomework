@@ -20,15 +20,14 @@ public class TestBase {
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = System.getProperty("browser"); //задаем парметр из Jenkins
-        if (Configuration.browser == null) {
+        /*if (Configuration.browser == null) {
             throw new IllegalStateException("Параметр 'browser' не передан через Jenkins, проверьте параметры запуска");
-        }
+        }*/
         Configuration.browserVersion = System.getProperty("browserVersion"); //задаем парметр из Jenkins
         Configuration.browserSize = System.getProperty("browserSize"); //задаем парметр из Jenkins
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = System.getProperty("remoteUrl"); //задаем парметр из Jenkins - подключаемся к удалённой ферме
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
