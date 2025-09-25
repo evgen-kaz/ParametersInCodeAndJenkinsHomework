@@ -19,10 +19,12 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
+        Configuration.browser = System.getProperty("browser"); //задаем парметр из Jenkins
+        Configuration.browserVersion = System.getProperty("browserVersion"); //задаем парметр из Jenkins
+        Configuration.browserSize = System.getProperty("browserSize"); //задаем парметр из Jenkins
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub"; //подключаемся к удалённой ферме
+        Configuration.remote = "remoteDriverUrl"; //подключаемся к удалённой ферме
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(

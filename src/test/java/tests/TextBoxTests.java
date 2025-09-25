@@ -1,11 +1,13 @@
 package tests;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static pages.TextBoxPage.*;
 
+@Tag("Registration")
 public class TextBoxTests extends TestBase{
     TextBoxPage textBoxPage = new TextBoxPage();
 
