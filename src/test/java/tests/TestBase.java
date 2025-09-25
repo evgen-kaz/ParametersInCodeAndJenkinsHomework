@@ -24,7 +24,7 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browserSize"); //задаем парметр из Jenkins
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "wdhost"; //подключаемся к удалённой ферме
+        Configuration.remote = "remoteUr"; //задаем парметр из Jenkins - подключаемся к удалённой ферме
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
