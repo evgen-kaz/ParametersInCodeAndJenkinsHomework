@@ -2,6 +2,8 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
+
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static pages.TextBoxPage.*;
 
 public class TextBoxTests extends TestBase{
@@ -9,8 +11,11 @@ public class TextBoxTests extends TestBase{
 
     @Test
     void fillFormTest() {
-        textBoxPage.openPage()
-                .setFirstName(firstName)
+        textBoxPage.openPage();
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        executeJavaScript("window.onloadCallback = function() { console.log('Fake reCAPTCHA onloadCallback called'); };");
+        textBoxPage.setFirstName(firstName)
                 .setEmail(email)
                 .setCurrentAddress(currentAddress)
                 .setPermanentAddress(permanentAddress)
