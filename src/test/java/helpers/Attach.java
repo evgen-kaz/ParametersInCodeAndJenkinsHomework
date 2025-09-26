@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.sessionId;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
 
-public class Attach { //акисома. редко когда изменится. будет идти с нами очень долго
+public class Attach { 
 
     @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {
@@ -39,15 +39,14 @@ public class Attach { //акисома. редко когда изменится
     }
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
-    public static String addVideo() { //как будто добавляем видеоплеер на нашу страницу, используя возможности html
+    public static String addVideo() {
         return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
-                + getVideoUrl(getSessionId()) //указываем путь к этому видео
+                + getVideoUrl(getSessionId())
                 + "' type='video/mp4'></video></body></html>";
     }
 
-    public static URL getVideoUrl(String sessionId) { //достаем ссылку на видео
-        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId + ".mp4"; //узнаем имя видео
-        //оно аттачится к sessionId, будет вот https://selenoid.autotests.cloud/video/35f16253614c0a3e2f78120b7e72424a.mp4
+    public static URL getVideoUrl(String sessionId) { 
+        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId + ".mp4"; 
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {
@@ -56,7 +55,7 @@ public class Attach { //акисома. редко когда изменится
         return null;
     }
 
-    public static String getSessionId(){ //получаем sessionId
+    public static String getSessionId(){
         return ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
     }
 }
