@@ -19,15 +19,15 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browser = System.getProperty("browser");  //задаем парметр из Jenkins
+        Configuration.browser = System.getProperty("browser"); 
         /*if (Configuration.browser == null) {
             throw new IllegalStateException("Параметр 'browser' не передан через Jenkins, проверьте параметры запуска");
         }*/
-        Configuration.browserVersion = System.getProperty("browserVersion"); //задаем парметр из Jenkins
-        Configuration.browserSize = System.getProperty("browserSize"); //задаем парметр из Jenkins
+        Configuration.browserVersion = System.getProperty("browserVersion");
+        Configuration.browserSize = System.getProperty("browserSize"); 
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = System.getProperty("remoteUrl"); //задаем парметр из Jenkins - подключаемся к удалённой ферме
+        Configuration.remote = System.getProperty("remoteUrl");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
@@ -38,15 +38,15 @@ public class TestBase {
 
     @BeforeEach
     void setupConfig() {
-        SelenideLogger.addListener("allure", new AllureSelenide()); //добавляем слушателя в каждый запуск теста
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterEach
-    void addAttachments() { //в конце каждого теста
-        Attach.screenshotAs("Last screenshot"); //добавляем скриншот
-        Attach.pageSource(); //добавляем pageSource
-        Attach.browserConsoleLogs(); //добавляем логи консоли
-        Attach.addVideo(); //добавляем видео
-        Selenide.closeWebDriver(); //закрываем сессию браузера
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot"); 
+        Attach.pageSource(); 
+        Attach.browserConsoleLogs();
+        Attach.addVideo(); 
+        Selenide.closeWebDriver();
     }
 }
