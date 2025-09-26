@@ -9,9 +9,5 @@ public class CalendarComponent {
         $(".react-datepicker__month-select").$(byText(month)).click();
         $(".react-datepicker__year-select").$(byText(year)).click();
         $(byText(day)).click();
-        //$(".react-datepicker__week").$(byText(day)).click(); - не работал такой способ.
-        //т.к. находит первый эелемент с таким классом (первую неделю) и там ещет день
-        //рано или поздно сломается. => ищем сразу по всему календарю
-        //возврат из него никакой не нужен. поэтому void
     }
 }
