@@ -3,6 +3,19 @@ plugins {
     id 'io.qameta.allure' version '2.12.0'
 }
 
+allure {
+    report {
+        version.set("2.35.1")
+    }
+    adapter { // отвечает за появление папки build/allure-results
+        aspectjWeaver.set(true) //обработка аннотации @Step
+        frameworks {
+            junit5 {  //название фреймворка
+                adapterVersion.set("2.29.1") //версия интеграции фреймворка и Allure
+            }
+        }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -19,9 +32,11 @@ dependencies {
 
 tasks.withType(Test) {
     useJUnitPlatform()
-    systemProperties(System.getProperties())
+    systemProperties(System.getProperties()) //необходима для работы. помогает считывать переменные
+    //systemProperties - устанавливаем проперти в рантйам java, а в System.getProperties() - это проперти, которые пришли на вход в build.gradle,
+    // прикидываем их внутрь
 
-    testLogging {
+    testLogging { //чуть изменили и теперь будет побольше всего выводиться в консоль
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
@@ -30,24 +45,13 @@ tasks.withType(Test) {
 }
 
 test {
-    useJUnitPlatform()
+    //тестка "test", которая запускает все тесты проекта. дефолтная. если ее убрать, то по дефолту будет собирать с JUnit 4, а не 5.
+    useJUnitPlatform() //помогает переоперделить дефолтную таску "test", чтобы использовался JUnit 5, а не 4
 }
 
-allure {
-    report {
-        version.set("2.35.1")
-    }
-    adapter {
-        aspectjWeaver.set(true)
-        frameworks {
-            junit5 {
-                adapterVersion.set("2.29.1")
-            }
-        }
-    }
-}
 
 task registration_test(type: Test) { //тип таски
+    systemProperties(System.getProperties())
     useJUnitPlatform {
         includeTags("Registration") //запускаем тесты с тегом Registration
     }
@@ -55,14 +59,14 @@ task registration_test(type: Test) { //тип таски
 
 task property_test(type: Test) {
     systemProperties(System.getProperties())
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags("property")
     }
 }
 
 task hello_test(type: Test) {
     systemProperties(System.getProperties())
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags("hello")
     }
 }
